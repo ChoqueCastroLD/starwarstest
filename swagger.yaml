@@ -1,0 +1,122 @@
+swagger: '2.0'
+info:
+  title: Starwars Test Planet API
+  version: 1.0.0
+paths:
+  /planet/create:
+    post:
+      summary: Create a new planet
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: planet
+          description: Planet object
+          required: true
+          schema:
+            type: object
+            properties:
+              nombre:
+                type: string
+              periodo_rotacion:
+                type: number
+              periodo_orbital:
+                type: number
+              diametro:
+                type: number
+              clima:
+                type: string
+              gravedad:
+                type: string
+              terreno:
+                type: string
+              agua_superficial:
+                type: string
+              poblacion:
+                type: number
+      responses:
+        200:
+          description: Data saved successfully
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              data:
+                type: object
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              error:
+                type: string
+  /planet/get/{id}:
+    get:
+      summary: Get planet by ID
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Planet data retrieved successfully
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              data:
+                type: object
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              error:
+                type: string
+  /planet/import:
+    post:
+      summary: Import a planet from SWAPI
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: id
+          description: ID of the planet to import from SWAPI
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+      responses:
+        200:
+          description: Data saved successfully, returning the ID
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              data:
+                type: string
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              error:
+                type: string

@@ -1,7 +1,7 @@
 'use strict';
 
-const { planetsSchema } = require("../models/planets");
-const { getDb } = require("../utils/database");
+const { planetsSchema } = require("../models/planets.js");
+const { getDb } = require("../utils/database.js");
 
 module.exports.get = async (event) => {
     try {
@@ -9,8 +9,12 @@ module.exports.get = async (event) => {
         const id = requestParameters.id;
 
         const { db, connection } = await getDb();
-        const planet = await db.select().from(planetsSchema).where({ id });
+        const [ planet ] = await db.select().from(planetsSchema).where({ id });
         await connection.end();
+
+        if (!planet) {
+            throw new Error('Planet not found');
+        }
 
         return {
             statusCode: 200,

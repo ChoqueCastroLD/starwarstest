@@ -1,8 +1,8 @@
 'use strict';
 
-const { planetsSchema } = require("../models/planets");
-const { getDb } = require("../utils/database");
-const { validateObject } = require("../utils/validate");
+const { planetsSchema } = require("../models/planets.js");
+const { getDb } = require("../utils/database.js");
+const { validateObject } = require("../utils/validate.js");
 
 module.exports.create = async (event) => {
   try {
@@ -23,7 +23,7 @@ module.exports.create = async (event) => {
     validateObject(requestBody, validationSchema); // will throw an error if invalid
 
     const { db, connection } = await getDb();
-    const planet = await db.insert(planetsSchema).values(requestBody);
+    const [ planet ] = await db.insert(planetsSchema).values(requestBody);
     await connection.end();
 
     return {

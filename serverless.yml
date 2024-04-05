@@ -10,21 +10,21 @@ functions:
     handler: handlers/get.get
     events:
       - http:
-          path: get/{id}
+          path: planet/get/{id}
           method: get
 
   create:
     handler: handlers/create.create
     events:
       - http:
-          path: create
+          path: planet/create
           method: post
 
   import:
     handler: handlers/import.import
     events:
       - http:
-          path: import
+          path: planet/import
           method: post
 
 plugins:
