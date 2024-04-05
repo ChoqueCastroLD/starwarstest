@@ -1,0 +1,31 @@
+service: serverless-swapi-example
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-south-1
+
+functions:
+  get:
+    handler: handlers/get.get
+    events:
+      - http:
+          path: get/{id}
+          method: get
+
+  create:
+    handler: handlers/create.create
+    events:
+      - http:
+          path: create
+          method: post
+
+  import:
+    handler: handlers/import.import
+    events:
+      - http:
+          path: import
+          method: post
+
+plugins:
+  - serverless-offline
